@@ -1,4 +1,4 @@
-<template>
+<template v-slot:dropdown>
     <el-menu 
     default-active="1-4-1" 
     class="el-menu-vertical-demo" 
@@ -12,12 +12,12 @@
         <h3>{{ isCollapse ? '后台' : 'AI在线标注平台' }}</h3>
         <el-menu-item @click="clickMenu(item)" v-for="item in noChildren" :key="item.name" :index="item.name">
             <i :class="`el-icon-${item.icon}`"></i>
-            <span slot="title">{{ item.label }}</span>
+            <span dropdown-slot="title">{{ item.label }}</span>
         </el-menu-item>
         <el-submenu v-for="item in hasChildren" :key="item.label" :index="item.label">
-            <template slot="title">
+            <template dropdown-slot="title">
                 <i :class="`el-icon-${item.icon}`"></i>
-                <span slot="title">{{ item.label }}</span>
+                <span dropdown-slot="title">{{ item.label }}</span>
             </template>
             <el-menu-item-group v-for="subItem in item.children" :key="subItem.path">
                 <el-menu-item @click="clickMenu(subItem)" :index="subItem.path">{{ subItem.label }}</el-menu-item>
@@ -27,7 +27,21 @@
     
 </template>
 <script>
-export default(){
-    
+export default{
+    data(){
+        return{
+            menuData:[{
+
+            
+            path: "/",
+                    name: "home",
+                    label: "首页",
+                    icon: "s-home",
+                    url: "Home/Home"
+                } ]
+            
+        }
+    }
+
 }
 </script>
